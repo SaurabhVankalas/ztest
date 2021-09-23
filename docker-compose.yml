@@ -1,0 +1,32 @@
+version: "3.7"
+services:
+  crudapp:
+    build:
+      context: .
+      dockerfile: ./src/Dockerfile
+    container_name: crudapp
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./src:/app
+    entrypoint: ["python"]
+    command: ["main.py"]
+    networks:
+      - overlay
+
+  telegram_bot:
+    build:
+      context: .
+      dockerfile: ./src_telegram/Dockerfile
+    container_name: telegram_bot
+    # ports:
+    # - "9000:9000"
+    volumes:
+      - ./src_telegram:/app
+    entrypoint: ["python"]
+    command: ["telegram_bot.py"]
+    networks:
+      - overlay
+
+networks:
+  overlay:

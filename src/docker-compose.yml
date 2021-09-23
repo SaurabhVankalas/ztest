@@ -1,0 +1,13 @@
+version: '3.7'
+services:
+ telegram_bot:
+    build:
+      context: .
+      dockerfile: ./src_telegram/Dockerfile
+    container_name: telegram_bit
+    ports:
+      - "8000:4000"
+    volumes:
+      - ./src_telegram:/app
+    entrypoint: ["python"]
+    command: ["telegram_bot.py"]
